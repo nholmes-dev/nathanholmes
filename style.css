@@ -125,3 +125,12 @@ nav a:hover {
     text-underline-offset: 4px;
     text-decoration: underline;
 }
+/* Inline Code Keywords */
+code {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #1e293b; /* Slightly lighter slate background than your main dark page */
+    color: #38bdf8;            /* That same sleek sky blue to match your links */
+    padding: 0.2rem 0.4rem;    /* Tiny bit of breathing room around the word */
+    border-radius: 4px;        /* Soft rounded corners */
+    font-size: 0.9em;          /* Scales perfectly with your regular paragraph size */
+}
