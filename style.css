@@ -1,0 +1,104 @@
+/* Modern Minimalist Dark Theme for Tech/DevOps Portfolio */
+:root {
+    --bg-color: #0f172a;       /* Deep Slate Blue/Gray */
+    --text-color: #cbd5e1;     /* Muted Silver/White */
+    --heading-color: #f8fafc;  /* Bright White */
+    --accent-color: #38bdf8;   /* Cloud Blue */
+    --accent-hover: #0ea5e9;   /* Darker Blue on Hover */
+    --border-color: #334155;   /* Subtle divider color */
+    --max-width: 800px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 2rem 1rem;
+}
+
+/* Page Layout Container */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+/* Header & Navigation Styling */
+header nav {
+    padding: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+header nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0 0.25rem;
+    transition: color 0.2s ease;
+}
+
+header nav a:hover {
+    color: var(--accent-color);
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+    color: var(--heading-color);
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+h1 { font-size: 2.2rem; margin-top: 0; }
+h2 { font-size: 1.6rem; color: var(--accent-color); border-bottom: 1px solid var(--border-color); padding-bottom: 0.3rem; margin-top: 2rem;}
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.1rem; color: #94a3b8; margin-bottom: 0.25rem; }
+
+/* Links */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+/* Lists and Lists Items */
+ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+li strong {
+    color: var(--heading-color);
+}
+
+/* Clean up legacy <hr> lines into elegant borders */
+hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 1.5rem 0;
+}
+
+/* Resume Specific Styling */
+article {
+    margin-bottom: 2rem;
+}
+
+em {
+    color: #94a3b8;
+    font-style: normal;
+}
