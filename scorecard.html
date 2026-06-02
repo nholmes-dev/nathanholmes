@@ -69,15 +69,19 @@
             font-size: 1.1rem;
         }
 
+        /* Side-by-side break and live table metrics tracker */
         .break-tracker {
-            text-align: center;
+            display: flex;
+            justify-content: space-around;
             background: #0f172a;
-            padding: 10px;
+            padding: 12px;
             border-radius: 4px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 20px;
             color: #94a3b8;
+            text-align: center;
         }
+        
         .controls-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -174,9 +178,10 @@
                 </div>
             </div>
 
-            <!-- Live Break Tracker -->
+            <!-- Live Multi-Metric Tracker Box -->
             <div class="break-tracker">
-                Current Break: <span id="current-break" style="color: #38bdf8; font-weight: bold;">0</span>
+                <div>Current Break: <span id="current-break" style="color: #38bdf8; font-weight: bold;">0</span></div>
+                <div>Points Remaining: <span id="available-points" style="color: #10b981; font-weight: bold;">147</span></div>
             </div>
 
             <!-- Scoring Controls -->
@@ -238,6 +243,11 @@
         let currentBreak = 0;
         let lastPlayer = 0;
 
+        // Snooker Live Table State Engine Variables
+        let redsLeft = 15;
+        let onColorOpportunity = false;
+        let colorsRemainingSequence = [2, 3, 4, 5, 6, 7];
+
         // Dynamic Label Syncer
         function syncActionLabels() {
             const name1 = document.getElementById('p1-name').value.trim() || "Player 1";
@@ -246,13 +256,45 @@
             document.getElementById('p2-action-header').innerText = name2 + " Actions";
         }
 
+        // Live remaining points mathematical calculator
+        function updateAvailablePoints() {
+            let remainingPoints = 0;
+            if (redsLeft > 0) {
+                remainingPoints = (redsLeft * 8) + 27;
+                if (onColorOpportunity) {
+                    remainingPoints += 7; // Adds potential maximum color value (Black) for the red just potted
+                }
+            } else {
+                remainingPoints = colorsRemainingSequence.reduce((sum, val) => sum + val, 0);
+            }
+            document.getElementById('available-points').innerText = remainingPoints;
+        }
+
         function addScore(player, points) {
             if (lastPlayer !== 0 && lastPlayer !== player) {
                 currentBreak = 0;
+                if (redsLeft > 0) onColorOpportunity = false; 
             }
             
             lastPlayer = player;
             currentBreak += points;
+
+            // Compute structural table state variations
+            if (points === 1) {
+                if (redsLeft > 0) {
+                    redsLeft--;
+                    onColorOpportunity = true;
+                }
+            } else {
+                if (redsLeft > 0 || onColorOpportunity) {
+                    onColorOpportunity = false;
+                } else if (redsLeft === 0) {
+                    // Colors phase: safely clean off colors from table sequentially
+                    if (colorsRemainingSequence.length > 0 && points === colorsRemainingSequence[0]) {
+                        colorsRemainingSequence.shift();
+                    }
+                }
+            }
 
             if (player === 1) {
                 p1Score += points;
@@ -263,12 +305,14 @@
             }
             
             document.getElementById('current-break').innerText = currentBreak;
+            updateAvailablePoints();
         }
 
         function foul(foulingPlayer, penaltyPoints) {
             currentBreak = 0;
             document.getElementById('current-break').innerText = currentBreak;
             lastPlayer = 0;
+            if (redsLeft > 0) onColorOpportunity = false;
 
             if (foulingPlayer === 1) {
                 p2Score += penaltyPoints;
@@ -277,6 +321,7 @@
                 p1Score += penaltyPoints;
                 document.getElementById('p1-display').innerText = p1Score;
             }
+            updateAvailablePoints();
         }
 
         // Frame update backend engine + global live tracker updates
@@ -289,8 +334,15 @@
                 document.getElementById('p2-frames').innerText = p2Frames;
             }
             
-            // Auto-calculate current frame number
             document.getElementById('match-frame-num').innerText = p1Frames + p2Frames + 1;
+        }
+
+        // Resets the table layout state specifically for a fresh frame
+        function resetTableState() {
+            redsLeft = 15;
+            onColorOpportunity = false;
+            colorsRemainingSequence = [2, 3, 4, 5, 6, 7];
+            updateAvailablePoints();
         }
 
         // Calculates winner, awards the frame, and safely prepares the table for the next frame
@@ -327,6 +379,7 @@
                 document.getElementById('p1-display').innerText = 0;
                 document.getElementById('p2-display').innerText = 0;
                 document.getElementById('current-break').innerText = 0;
+                resetTableState();
             }
         }
 
@@ -348,6 +401,7 @@
                 document.getElementById('p1-name').value = "Player 1";
                 document.getElementById('p2-name').value = "Player 2";
                 syncActionLabels();
+                resetTableState();
             }
         }
     </script>
