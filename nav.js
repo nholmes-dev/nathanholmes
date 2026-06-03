@@ -1,17 +1,19 @@
-// Centralized Navigation Component
-document.addEventListener("DOMContentLoaded", function() {
-    const navHTML = `
-        <nav>
-            <a href="index.html">Home</a> | 
-            <a href="cv.html">CV</a> | 
-            <a href="projects.html">Projects</a> |
-            <a href="contact.html">Contact</a>
-        </nav>
-    `;
-    
-    // Inject the navigation into the <header> element of the page
-    const headerElement = document.querySelector('header');
-    if (headerElement) {
-        headerElement.innerHTML = navHTML;
-    }
-});
+// nav.js
+const headerTemplate = `
+  <header class="site-header">
+    <div class="header-logo">
+      <a href="/">
+        <img src="images/logo.png" alt="NH Logo" id="main-logo">
+      </a>
+    </div>
+    <nav class="header-nav">
+      <a href="/">Home</a> | 
+      <a href="/cv">CV</a> | 
+      <a href="/projects">Projects</a> | 
+      <a href="/contact">Contact</a>
+    </nav>
+  </header>
+`;
+
+// Injects the layout precisely where the script tag is called in your HTML files
+document.currentScript.insertAdjacentHTML('afterend', headerTemplate);
