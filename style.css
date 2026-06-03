@@ -134,3 +134,39 @@ code {
     border-radius: 4px;        /* Soft rounded corners */
     font-size: 0.9em;          /* Scales perfectly with your regular paragraph size */
 }
+/* Header Flexbox Layout Setup */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #1e293b; /* Replaces old bottom border rule if necessary */
+    margin-bottom: 25px;
+}
+
+/* Logo Sizing Control */
+.header-logo a {
+    display: inline-block;
+}
+
+#main-logo {
+    height: 40px; /* Constrains the logo height cleanly */
+    width: auto;  /* Maintains proper image proportions */
+    display: block;
+}
+
+/* Nav Menu Constraints */
+.header-nav {
+    font-size: 1rem;
+    color: #94a3b8;
+}
+
+.header-nav a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.header-nav a:hover {
+    color: #38bdf8; /* Subtle blue highlight on hover */
+}
