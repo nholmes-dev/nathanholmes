@@ -15,7 +15,7 @@ The goal of this portfolio is not just to display static links, but to demonstra
 The portfolio dynamically showcases a curated selection of my work, including:
 
 *   **[Digital Snooker Scoreboard](https://www.snookerscoreboard.co.uk):** A feature-rich, responsive web application utilizing complex client-side JavaScript state management, customized gameplay variations (Singles, Doubles, Cut-Throat), and an integrated handicap system.
-*   **[Friends Car Garage Website](https://www.prestonautocareltd.pages.dev):** A sleek, fully optimized, and production-ready business website built from scratch to deliver an exceptional local SEO and user experience—serving as the foundational piece of my professional portfolio.
+*   **[Friends Car Garage Website]([https://www.prestonautocareltd.pages.dev](https://prestonautocareltd.pages.dev/)):** A sleek, fully optimized, and production-ready business website built from scratch to deliver an exceptional local SEO and user experience—serving as the foundational piece of my professional portfolio.
 *   **Upcoming Infrastructure Projects:** Placeholders and early-stage repositories (such as a specialized Rugby Drill Timer) mapping out my active expansion into advanced timing logic and automated environments.
 
 ## 🧰 Tech Stack & Architecture
